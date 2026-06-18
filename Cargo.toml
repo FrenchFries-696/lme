@@ -1,0 +1,28 @@
+[package]
+name = "lme"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+embedding = ["ort", "tokenizers", "ureq"]
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+sha2 = "0.10"
+chrono = { version = "0.4", features = ["serde"] }
+
+# Embedding (optional — requires ONNX Runtime installed)
+ort = { version = "2.0.0-rc.12", optional = true }
+tokenizers = { version = "0.21", optional = true }
+ureq = { version = "2", optional = true }
+
+[dev-dependencies]
+tempfile = "3"

@@ -1,0 +1,30 @@
+[store]
+store_triggers = ["remember", "save this", "store memory"]
+context_triggers = ["recall context", "what do we know", "load context"]
+
+[decay]
+lambda_conversation = 0.01
+lambda_knowledge = 0.005
+lambda_learning = 0.005
+lambda_decision = 0.002
+lambda_architecture = 0.001
+conf_inferred = 0.6
+prune_threshold = 0.01
+
+[embedding]
+model = "bge-m3"
+model_path = "/Users/damtuana/Projects/2ndbrain/models/bge-m3-int8.onnx"
+tokenizer_path = "/Users/damtuana/Projects/2ndbrain/models/bge-m3-tokenizer.json"
+lazy_load = true
+idle_unload_secs = 300
+
+[database]
+path = "/Users/damtuana/Projects/2ndbrain/data/lme.db"
+wal_mode = true
+
+[limits]
+max_context_chars = 50000
+max_search_results = 20
+
+[user]
+owner_id = "default-user"
