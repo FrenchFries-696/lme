@@ -37,6 +37,11 @@ pub fn lme_store(state: &Arc<AppState>, args: Value) -> Result<Value, LmeError> 
         .map(|a| a.iter().filter_map(|v| v.as_str().map(String::from)).collect())
         .unwrap_or_default();
 
+    let sensitivity = args
+        .get("sensitivity")
+        .and_then(|v| v.as_str())
+        .and_then(|s| crate::storage::models::Sensitivity::from_str(s));
+
     // Use GuardedStore pipeline (FR-GRD-01 through FR-GRD-07, FR-CMP-04)
     let result = guardrails::GuardedStore::store(
         &state.storage,
@@ -48,6 +53,7 @@ pub fn lme_store(state: &Arc<AppState>, args: Value) -> Result<Value, LmeError> 
         &memory_type_str,
         importance,
         &tags,
+        sensitivity,
     )?;
 
     // Generate embedding if ONNX is available

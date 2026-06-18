@@ -89,7 +89,7 @@ fn test_lme_store_and_recall() {
         r#"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05"}}"#);
 
     // Store a memory
-    let store_response = rpc_call(&mut stdin, &mut stdout_reader, r#"{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"lme_store","arguments":{"project":"test-proj","memory_type":"knowledge","essence":"test integration","source_ref":"integration/test.md"}}}"#);
+    let store_response = rpc_call(&mut stdin, &mut stdout_reader, r#"{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"lme_store","arguments":{"project":"test-proj","memory_type":"knowledge","essence":"test integration","source_ref":"integration/test.md","sensitivity":"internal"}}}"#);
     assert!(store_response.contains("hash"), "store: {}", store_response);
     assert!(store_response.contains("stored"), "store: {}", store_response);
 
@@ -121,7 +121,7 @@ fn test_lme_store_and_search() {
         r#"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05"}}"#);
 
     // Store memories with Vietnamese text
-    rpc_call(&mut stdin, &mut stdout_reader, r#"{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"lme_store","arguments":{"project":"vn-proj","memory_type":"knowledge","essence":"quyết định kiến trúc","facts":["dùng Rust"],"source_ref":"vn/meeting.md"}}}"#);
+    rpc_call(&mut stdin, &mut stdout_reader, r#"{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"lme_store","arguments":{"project":"vn-proj","memory_type":"knowledge","essence":"quyết định kiến trúc","facts":["dùng Rust"],"source_ref":"vn/meeting.md","sensitivity":"internal"}}}"#);
 
     // Search
     let search_response = rpc_call(&mut stdin, &mut stdout_reader, r#"{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"lme_search","arguments":{"query":"quyết định","project":"vn-proj"}}}"#);

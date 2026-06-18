@@ -121,6 +121,7 @@ fn build_tool_defs(config: &Config) -> Vec<Value> {
                     "facts": {"type": "array", "items": {"type": "string"}, "description": "Extractive facts (exact values, no paraphrase)"},
                     "source_ref": {"type": "string", "description": "Source reference (file path, URL, conversation ID)"},
                     "importance": {"type": "integer", "minimum": 1, "maximum": 5, "default": 3},
+                    "sensitivity": {"type": "string", "enum": ["public","internal","secret"], "default": "secret", "description": "Default: secret (conservative)"},
                     "tags": {"type": "array", "items": {"type": "string"}, "default": []}
                 },
                 "required": ["project", "memory_type", "essence", "source_ref"]

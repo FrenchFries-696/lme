@@ -48,6 +48,7 @@ impl GuardedStore {
         memory_type: &str,
         importance: Option<u8>,
         tags: &[String],
+        sensitivity: Option<Sensitivity>,
     ) -> Result<StoreResult, LmeError> {
         // --- 1. Validate source_ref (FR-GRD-03) ---
         source_ref::validate_source_ref(source_ref)?;
@@ -80,7 +81,7 @@ impl GuardedStore {
 
         // --- 4. Content hash + dedup (FR-GRD-04) ---
         let mt = MemoryType::from_str(memory_type).unwrap_or(MemoryType::Knowledge);
-        let sens = Sensitivity::from_str("internal").unwrap_or(Sensitivity::Secret);
+        let sens = sensitivity::default_sensitivity(sensitivity);
 
         let input = StoreInput {
             project: project.to_string(),
