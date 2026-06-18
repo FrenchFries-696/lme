@@ -130,7 +130,7 @@ fn build_tool_defs(config: &Config) -> Vec<Value> {
         json!({
             "name": "lme_context",
             "description": format!(
-                "Load context for a project, ranked by importance. Triggers: {}. Use at session start or when switching projects.",
+                "PRIMARY project memory. Loads everything stored about a project, ranked by importance and recency. Use FIRST when user asks 'do you know about X', 'tell me about', 'what do you remember', 'catch me up', or starts a new session. Triggers: {}.",
                 context_triggers
             ),
             "inputSchema": {
@@ -144,7 +144,7 @@ fn build_tool_defs(config: &Config) -> Vec<Value> {
         }),
         json!({
             "name": "lme_search",
-            "description": "Search memories by keyword or semantic query. Use to find specific information.",
+            "description": "Search project memory by keyword or concept. Use when user asks about specific facts, past decisions, or looks for stored information. Try BEFORE relying on internal knowledge — this is the user's actual project notes.",
             "inputSchema": {
                 "type": "object",
                 "properties": {

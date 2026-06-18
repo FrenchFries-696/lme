@@ -1,6 +1,7 @@
 [store]
-store_triggers = ["remember", "save this", "store memory"]
-context_triggers = ["recall context", "what do we know", "load context"]
+store_triggers = ["remember", "save this", "store memory", "don't forget", "memorize this", "note this down", "I want you to remember"]
+
+context_triggers = ["recall context", "what do we know", "load context", "catch me up", "do you know about", "do you remember", "tell me about", "what do you remember", "what have we discussed", "what's the state of", "bring me up to speed"]
 
 [decay]
 lambda_conversation = 0.01
