@@ -28,6 +28,14 @@ impl Storage {
         project: Option<&str>,
         limit: usize,
     ) -> Result<Vec<MemoryUnit>, LmeError> {
+        // Rewrite multi-word queries to OR (FTS5 default is implicit AND).
+        // "architecture LME project" → "architecture OR LME OR project"
+        let query = if query.split_whitespace().count() > 1 {
+            query.split_whitespace().collect::<Vec<_>>().join(" OR ")
+        } else {
+            query.to_string()
+        };
+
         let (sql, params_vec): (String, Vec<Box<dyn rusqlite::types::ToSql>>) = if let Some(proj) = project {
             (
                 format!(
@@ -37,7 +45,7 @@ impl Storage {
                      ORDER BY rank LIMIT {}",
                     MEMORY_COLS_M, limit
                 ),
-                vec![Box::new(query.to_string()), Box::new(proj.to_string())],
+                vec![Box::new(query.clone()), Box::new(proj.to_string())],
             )
         } else {
             (
@@ -48,7 +56,7 @@ impl Storage {
                      ORDER BY rank LIMIT {}",
                     MEMORY_COLS_M, limit
                 ),
-                vec![Box::new(query.to_string())],
+                vec![Box::new(query.clone())],
             )
         };
 
