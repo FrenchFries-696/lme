@@ -158,11 +158,12 @@ fn build_tool_defs(config: &Config) -> Vec<Value> {
         }),
         json!({
             "name": "lme_recall",
-            "description": "Recall a specific memory by its hash. Use to get full details of a previously stored memory.",
+            "description": "Recall a specific memory by its hash. Falls back to prefix match within project if hash lookup fails (e.g. hash corrupted in transit).",
             "inputSchema": {
                 "type": "object",
                 "properties": {
-                    "hash": {"type": "string", "description": "SHA-256 hash of the memory unit"}
+                    "hash": {"type": "string", "description": "SHA-256 hash of the memory unit"},
+                    "project": {"type": "string", "description": "Required for fallback: project to search for prefix match when exact hash fails"}
                 },
                 "required": ["hash"]
             }

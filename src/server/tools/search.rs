@@ -57,6 +57,8 @@ pub fn lme_search(state: &Arc<AppState>, args: Value) -> Result<Value, LmeError>
             json!({
                 "hash": scored.memory.hash,
                 "essence": scored.memory.essence,
+                "summary": scored.memory.summary,
+                "facts": scored.memory.facts,
                 "importance": scored.memory.importance,
                 "memory_type": scored.memory.memory_type.as_str(),
                 "score": scored.decay_score
