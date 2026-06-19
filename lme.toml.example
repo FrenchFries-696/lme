@@ -14,13 +14,13 @@ prune_threshold = 0.01
 
 [embedding]
 model = "bge-m3"
-model_path = "/Users/damtuana/Projects/2ndbrain/models/bge-m3-int8.onnx"
-tokenizer_path = "/Users/damtuana/Projects/2ndbrain/models/bge-m3-tokenizer.json"
+model_path = "./models/bge-m3-int8.onnx"
+tokenizer_path = "./models/bge-m3-tokenizer.json"
 lazy_load = true
 idle_unload_secs = 300
 
 [database]
-path = "/Users/damtuana/Projects/2ndbrain/data/lme.db"
+path = "./data/lme.db"
 wal_mode = true
 
 [limits]

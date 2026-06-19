@@ -96,6 +96,9 @@ Every `lme_store` runs through mandatory checks:
 git clone https://github.com/FrenchFries-696/lme.git
 cd lme
 
+# Create your config from the example
+cp lme.toml.example lme.toml
+
 # Install ONNX Runtime (one time)
 brew install onnxruntime
 
@@ -130,22 +133,25 @@ Claude replies with engine stats: total memories, database size, model backend.
 
 ---
 
+#
 ## Config
 
-Edit `lme.toml` — **use absolute paths** for `model_path`, `tokenizer_path`, `database.path`:
+Copy `lme.toml.example` → `lme.toml` and edit to match your setup. Paths are relative to the project root — no changes needed if you run lme from this directory.
+
+To use absolute paths (e.g. for `LME_CONFIG` env var pointing elsewhere):
 
 ```toml
 [user]
 owner_id = "your-name"
 
 [database]
-path = "/absolute/path/to/lme/data/lme.db"
+path = "./data/lme.db"
 wal_mode = true
 
 [embedding]
 model = "bge-m3"
-model_path = "/absolute/path/to/lme/models/bge-m3-int8.onnx"
-tokenizer_path = "/absolute/path/to/lme/models/bge-m3-tokenizer.json"
+model_path = "./models/bge-m3-int8.onnx"
+tokenizer_path = "./models/bge-m3-tokenizer.json"
 lazy_load = true
 
 [decay]
